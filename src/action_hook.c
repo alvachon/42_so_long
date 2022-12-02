@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 18:21:12 by alvachon          #+#    #+#             */
-/*   Updated: 2022/11/30 19:05:43 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/02 16:00:28 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	x_close(t_master *game)
 {
 	if (game)
 	{
-		mlx_clear_window(game->mlx->mlx, game->mlx->win);
-		mlx_destroy_window(game->mlx->mlx, game->mlx->win);
+		mlx_clear_window(game, game->win);
+		mlx_destroy_window(game, game->win);
 	}
 	exit (0);
 }
@@ -27,8 +27,8 @@ int	red_exit(int key, t_master *game)
 	key = 0;
 	if (game)
 	{
-		mlx_clear_window(game->mlx->mlx, game->mlx->win);
-		mlx_destroy_window(game->mlx->mlx, game->mlx->win);
+		mlx_clear_window(game, game->win);
+		mlx_destroy_window(game, game->win);
 	}
 	exit (0);
 }

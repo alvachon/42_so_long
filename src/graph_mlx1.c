@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:03:50 by alvachon          #+#    #+#             */
-/*   Updated: 2022/11/30 19:05:43 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/02 16:02:41 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	all_floor(int x, t_master *game)
 
 	y = 32;
 	index_row = 2;
-	while (y < game->mlx->win_y - 32 && index_row < (game->data->max_row - 1))
+	while (y < game->win_y - 32 && index_row < (game->data->max_row - 1))
 	{
-		while (x < game->mlx->win_x - 32)
+		while (x < game->win_x - 32)
 		{
-			mlx_put_image_to_window(game->mlx->mlx, game->mlx->win,
-				game->mlx->img->floor, x, y);
+			mlx_put_image_to_window(game->mlx, game->win,
+				game->floor, x, y);
 			x += 32;
 		}
 		x = 32;
@@ -35,8 +35,8 @@ void	all_floor(int x, t_master *game)
 
 void	set_floor(t_master *game, int i, int row)
 {
-	mlx_put_image_to_window(game->mlx->mlx, game->mlx->win,
-		game->mlx->img->floor, i * 32, (row * 32) - 32);
+	mlx_put_image_to_window(game->mlx, game->win,
+		game->floor, i * 32, (row * 32) - 32);
 }
 
 void	set_active(t_master *game)

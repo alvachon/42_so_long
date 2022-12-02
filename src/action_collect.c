@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 18:37:32 by alvachon          #+#    #+#             */
-/*   Updated: 2022/11/30 19:05:43 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/02 16:00:40 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	collect_taken(t_master *game)
 void	unlock_exit(t_master *game)
 {
 	game->data->trig_exit = 1;
-	free_element(game->mlx->img->u_exit);
+	free_element(game->u_exit);
 	set_unlock(game, game->data->exit.index_row - 1,
 		game->data->exit.index_col + 1);
 }

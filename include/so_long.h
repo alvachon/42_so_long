@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:07:24 by alvachon          #+#    #+#             */
-/*   Updated: 2022/11/30 19:15:33 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/02 16:35:08 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,32 +41,6 @@
 #  undef BUFFER_SIZE
 #  define BUFFER_SIZE 0
 # endif
-
-typedef struct s_xpm
-{
-	void			*n_wall;
-	void			*s_wall;
-	void			*e_wall;
-	void			*w_wall;
-	void			*o_wall;
-	void			*floor;
-	void			*player;
-	void			*collect;
-	void			*u_exit;
-	void			*a_exit;
-}	t_xpm;
-
-typedef struct s_mlx
-{
-	void			*mlx;
-	void			*win;
-	int				win_x;
-	int				win_y;
-	int				x;
-	int				y;
-	struct s_xpm	*img;
-}	t_mlx;
-
 typedef struct s_nav
 {
 	int				len;
@@ -109,9 +83,24 @@ typedef struct s_data
 
 typedef struct s_master
 {
-	t_mlx			*mlx;
 	t_nav			*map;
 	t_data			*data;
+	void			*mlx;
+	void			*win;
+	int				win_x;
+	int				win_y;
+	int				x;
+	int				y;
+	void			*n_wall;
+	void			*s_wall;
+	void			*e_wall;
+	void			*w_wall;
+	void			*o_wall;
+	void			*floor;
+	void			*player;
+	void			*collect;
+	void			*u_exit;
+	void			*a_exit;
 }	t_master;
 
 /*action_collect.c*/
@@ -146,6 +135,7 @@ void		verify_matrix(t_master *game);
 
 /*graph_mlx.c*/
 void		set_xpm(t_master *game);
+void		set_wall(t_master *game);
 void		corner(t_master *game);
 void		col_wall(int pos, t_master *game);
 void		row_wall(int pos, t_master *game);

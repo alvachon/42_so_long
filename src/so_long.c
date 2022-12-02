@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:28:33 by alvachon          #+#    #+#             */
-/*   Updated: 2022/11/30 19:32:12 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/02 16:10:06 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,18 @@
 
 t_master	*set_memory(void)
 {
-	static	t_master	*game = NULL;
+	static t_master	*game = NULL;
+	t_data			*data;
+	t_nav			*map;
 
 	if (game == NULL)
 		game = ft_calloc(1, sizeof(t_master));
+	data = NULL;
+	data = ft_calloc(1, sizeof(t_data));
+	map = NULL;
+	map = ft_calloc(1, sizeof(t_nav));
+	game->data = data;
+	game->map = map;
 	return (game);
 }
 
@@ -42,8 +50,8 @@ void	verify_map(t_master *game, t_nav *map)
 		i++;
 	}
 	verify_dimension(len, game->data->max_row);
-	game->mlx->win_x = len * 32;
-	game->mlx->win_y = game->data->max_row * 32;
+	game->win_x = len * 32;
+	game->win_y = game->data->max_row * 32;
 	game->map = copy;
 }
 
@@ -52,11 +60,9 @@ void	verify_file(int fd, t_master *game)
 	int		row_count;
 	char	*line;
 	t_nav	*map;
-	t_data	*data;
 
 	row_count = 1;
 	map = game->map;
-	data = game->data;
 	line = NULL;
 	line = get_next_line(fd);
 	if (!line)
@@ -64,16 +70,13 @@ void	verify_file(int fd, t_master *game)
 	map = keep_data(row_count, line, NULL);
 	get_all_data(line, fd, row_count, &map);
 	printf("index : %d\n", map->index);
-	game->data->max_row = 1;
+	game->data->max_row = map->index;
 	printf("max_row : %d\n", game->data->max_row);
-	//game->data->max_row = map->index;
-	exit(1);
 	if (game->data->max_row <= 2)
 		null_error(NO_PLAY);
 	while (map->index != 1)
 		map = map->prev;
 	game->map = map;
-	exit(1);
 	verify_map(game, map);
 }
 
@@ -93,8 +96,7 @@ void	verify(int ac, char **av, t_master *game)
 	if (ft_strcmp(str, ".ber") != 0)
 		null_error(FILE_TYPE);
 	verify_file(fd, game);
-	exit(1);
-	verify_matrix(game);
+	//verify_matrix(game);
 	close(fd);
 }
 
@@ -104,12 +106,12 @@ int	main(int ac, char **av)
 
 	game = set_memory();
 	verify(ac, av + 1, game);
-	game->mlx->mlx = mlx_init();
+	game->mlx = mlx_init();
 	graph_mlx(game);
-	game->mlx->win = mlx_new_window(game->mlx->mlx,
-			game->mlx->win_x, game->mlx->win_y, "so_long");
-	mlx_hook(game->mlx->win, 17, 0, x_close, game);
-	mlx_hook(game->mlx->win, 2, 0, key_hook, game);
-	mlx_loop(game->mlx->mlx);
+	game->win = mlx_new_window(game->mlx,
+			game->win_x, game->win_y, "so_long");
+	mlx_hook(game->win, 17, 0, x_close, game);
+	mlx_hook(game->win, 2, 0, key_hook, game);
+	mlx_loop(game->mlx);
 	return (0);
 }
