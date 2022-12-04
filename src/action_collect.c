@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 18:37:32 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/02 16:00:40 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/04 16:00:49 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ int	collect_taken(t_master *game)
 				else
 					return (1);
 			}
-			else if (game->data->collectible->number != game->data->to_collect)
+			else if (game->data->collectible->number < game->data->to_collect)
+			{
 				game->data->collectible = game->data->collectible->next;
+			}
 		}
 	}
 	return (0);

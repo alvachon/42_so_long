@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:54:17 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/02 16:02:59 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/04 16:07:36 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ t_nav	*keep_data(int row_index, char *line, t_nav *last)
 	map = ft_calloc(1, sizeof(t_nav));
 	map->len = ft_strlen(line) - 1;
 	map->index = row_index;
-	printf("%d\n", map->index);
 	map->line = line;
-	printf("%s\n", line);
 	map->verif = line;
 	map->prev = last;
 	return (map);
