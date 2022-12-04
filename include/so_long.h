@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:07:24 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/02 16:35:08 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/03 21:26:49 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 # define SO_LONG_H
 
 # include "mlx.h"
+/*
+# ifdef __linux__
+#  include "mlx_linux/mlx.h"
+# else
+#  include "mlx/mlx.h"
+# endif*/
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>

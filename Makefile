@@ -31,9 +31,6 @@ SRCS        :=      src/action_collect.c \
                           
 OBJS        := $(SRCS:.c=.o)
 
-.c.o:
-	${CC} ${FLAGS} -c $< -o ${<:.c=.o}
-
 ################################################################################
 #                                  Makefile  objs                              #
 ################################################################################
@@ -48,6 +45,18 @@ CYAN 		:= \033[1;36m
 RM		    := rm -f
 
 UNAME		:=	$(shell uname)
+
+#Custom command for MacOS vs Linux
+ifeq ($(UNAME), Darwin)
+.c.o:
+	${CC} ${FLAGS} -Imlx -c $< -o ${<:.c=.o}
+endif
+
+ifeq ($(UNAME), Linux)
+.c.o:
+	${CC} ${FLAGS} -Imlx_linux -c $< -o ${<:.c=.o}
+endif
+##
 
 ifeq ($(UNAME), Darwin)
 $(NAME): ${OBJS}

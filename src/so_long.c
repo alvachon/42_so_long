@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:28:33 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/02 16:10:06 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/03 21:48:17 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,7 @@ void	verify_file(int fd, t_master *game)
 		null_error(NO_FILE);
 	map = keep_data(row_count, line, NULL);
 	get_all_data(line, fd, row_count, &map);
-	printf("index : %d\n", map->index);
 	game->data->max_row = map->index;
-	printf("max_row : %d\n", game->data->max_row);
 	if (game->data->max_row <= 2)
 		null_error(NO_PLAY);
 	while (map->index != 1)
@@ -107,11 +105,11 @@ int	main(int ac, char **av)
 	game = set_memory();
 	verify(ac, av + 1, game);
 	game->mlx = mlx_init();
-	graph_mlx(game);
 	game->win = mlx_new_window(game->mlx,
 			game->win_x, game->win_y, "so_long");
-	mlx_hook(game->win, 17, 0, x_close, game);
-	mlx_hook(game->win, 2, 0, key_hook, game);
+	graph_mlx(game);
+	/*mlx_hook(game->win, 17, 0, x_close, game);
+	mlx_hook(game->win, 2, 0, key_hook, game);*/
 	mlx_loop(game->mlx);
 	return (0);
 }

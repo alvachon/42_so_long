@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:32:09 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/02 16:35:09 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/03 21:55:17 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 
 void	set_xpm(t_master *game)
 {
-	game->e_wall = mlx_xpm_file_to_image(game->mlx,
-			"include/xpm/wall_e.xpm", &game->x, &game->y);
-	game->w_wall = mlx_xpm_file_to_image(game->mlx,
-			"include/xpm/wall_w.xpm", &game->x, &game->y);
 	game->floor = mlx_xpm_file_to_image(game->mlx,
 			"include/xpm/floor.xpm", &game->x, &game->y);
 	game->a_exit = mlx_xpm_file_to_image(game->mlx,
@@ -33,23 +29,23 @@ void	set_xpm(t_master *game)
 void	corner(t_master *game)
 {
 	game->o_wall = mlx_xpm_file_to_image(game->mlx,
-			"include/xpm/corner.xpm", &game->x, &game->y);
+			"include/xpm/wall_o.xpm", &game->x, &game->y);
 	if (game->o_wall == NULL)
 	{
 		free_element(game->o_wall);
 		exit(1);
 	}
-	mlx_put_image_to_window(game->mlx, &game->win,
+	mlx_put_image_to_window(game->mlx, game->win,
 		game->o_wall, 0, 0);
 	mlx_put_image_to_window(game->mlx, game->win,
-		&game->o_wall, 0, game->win_y - 32);
+		game->o_wall, 0, game->win_y - 32);
 	mlx_put_image_to_window(game->mlx, game->win,
 		game->o_wall, game->win_x - 32, 0);
 	mlx_put_image_to_window(game->mlx, game->win,
 		game->o_wall, game->win_x - 32, game->win_x - 32);
 }
 
-void	set_wall(t_master *game)
+void	set_row_wall(t_master *game)
 {
 	game->n_wall = mlx_xpm_file_to_image(game->mlx,
 			"include/xpm/wall_n.xpm", &game->x, &game->y);
@@ -67,9 +63,27 @@ void	set_wall(t_master *game)
 	}
 }
 
+void	set_col_wall(t_master *game)
+{
+	game->e_wall = mlx_xpm_file_to_image(game->mlx,
+			"include/xpm/wall_e.xpm", &game->x, &game->y);
+	if (game->e_wall == NULL)
+	{
+		free_element(game->e_wall);
+		exit(1);
+	}
+	game->w_wall = mlx_xpm_file_to_image(game->mlx,
+			"include/xpm/wall_w.xpm", &game->x, &game->y);
+	if (game->w_wall == NULL)
+	{
+		free_element(game->w_wall);
+		exit(1);
+	}
+}
+
 void	row_wall(int pos, t_master *game)
 {
-	set_wall(game);
+	set_row_wall(game);
 	while (pos != game->win_x - 32)
 	{
 		mlx_put_image_to_window(game->mlx, game->win,
@@ -87,6 +101,7 @@ void	row_wall(int pos, t_master *game)
 
 void	col_wall(int pos, t_master *game)
 {
+	set_col_wall(game);
 	while (pos != game->win_y - 32)
 	{
 		mlx_put_image_to_window(game->mlx, game->win,
@@ -110,8 +125,8 @@ void	graph_mlx(t_master *game)
 	set_xpm(game);
 	corner(game);
 	row_wall(position, game);
-	exit(1);
 	col_wall(position, game);
+	exit(1);
 	all_floor(position, game);
 	set_active(game);
 }
