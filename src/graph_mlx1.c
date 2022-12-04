@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:03:50 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/02 16:02:41 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/04 12:58:24 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,14 @@ void	all_floor(int x, t_master *game)
 
 	y = 32;
 	index_row = 2;
-	while (y < game->win_y - 32 && index_row < (game->data->max_row - 1))
+	game->floor = mlx_xpm_file_to_image(game->mlx,
+			"include/xpm/floor.xpm", &game->x, &game->y);
+	if (game->floor == NULL)
+	{
+		free_element(game->floor);
+		exit(1);
+	}
+	while (y <= game->win_y - 32 && index_row <= (game->data->max_row - 1))
 	{
 		while (x < game->win_x - 32)
 		{
@@ -62,4 +69,16 @@ void	set_active(t_master *game)
 		game->map = game->map->next;
 	}
 	place_at_player_up(game);
+}
+
+void	graph_mlx(t_master *game)
+{
+	int	position;
+
+	position = 32;
+	corner(game);
+	row_wall(position, game);
+	col_wall(position, game);
+	all_floor(position, game);
+	set_active(game);
 }

@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:28:33 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/03 21:48:17 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/04 13:06:08 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_master	*set_memory(void)
 	static t_master	*game = NULL;
 	t_data			*data;
 	t_nav			*map;
+	t_target		*collectible;
 
 	if (game == NULL)
 		game = ft_calloc(1, sizeof(t_master));
@@ -24,7 +25,10 @@ t_master	*set_memory(void)
 	data = ft_calloc(1, sizeof(t_data));
 	map = NULL;
 	map = ft_calloc(1, sizeof(t_nav));
+	collectible = NULL;
+	collectible = ft_calloc(1, sizeof(t_target));
 	game->data = data;
+	game->data->collectible = collectible;
 	game->map = map;
 	return (game);
 }
@@ -108,8 +112,8 @@ int	main(int ac, char **av)
 	game->win = mlx_new_window(game->mlx,
 			game->win_x, game->win_y, "so_long");
 	graph_mlx(game);
-	/*mlx_hook(game->win, 17, 0, x_close, game);
-	mlx_hook(game->win, 2, 0, key_hook, game);*/
+	/*mlx_hook(game->win, 17, 0, x_close, game);*/
+	mlx_key_hook(game->win, key_hook, game);
 	mlx_loop(game->mlx);
 	return (0);
 }

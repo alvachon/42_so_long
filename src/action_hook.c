@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 18:21:12 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/03 21:28:03 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/04 12:55:23 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,15 @@ int	x_close(t_master *game)
 
 int	key_hook(int key, t_master *game)
 {
-	/*if (key == 53)
+	/*if (key == 53)65307
 		red_exit(key, game);*/
-	if (key == 13)
+	if (key == 13 || key == 119)
 		player_up(game);
-	if (key == 1)
+	if (key == 1 || key == 115)
 		player_down(game);
-	if (key == 0)
+	if (key == 0 || key == 97)
 		player_left(game);
-	if (key == 2)
+	if (key == 2 || key == 100)
 		player_right(game);
 	return (0);
 }

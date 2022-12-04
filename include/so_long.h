@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:07:24 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/03 21:26:49 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/04 12:27:59 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
 # define SO_LONG_H
 
 # include "mlx.h"
-/*
-# ifdef __linux__
-#  include "mlx_linux/mlx.h"
-# else
-#  include "mlx/mlx.h"
-# endif*/
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -47,6 +41,7 @@
 #  undef BUFFER_SIZE
 #  define BUFFER_SIZE 0
 # endif
+
 typedef struct s_nav
 {
 	int				len;
@@ -140,17 +135,17 @@ void		matrix(t_nav **map, int i);
 void		verify_matrix(t_master *game);
 
 /*graph_mlx.c*/
-void		set_xpm(t_master *game);
-void		set_wall(t_master *game);
 void		corner(t_master *game);
-void		col_wall(int pos, t_master *game);
+void		set_row_wall(t_master *game);
+void		set_col_wall(t_master *game);
 void		row_wall(int pos, t_master *game);
-void		graph_mlx(t_master *game);
+void		col_wall(int pos, t_master *game);
 
 /*graph_mlx1.c*/
 void		all_floor(int x, t_master *game);
 void		set_floor(t_master *game, int i, int row);
 void		set_active(t_master *game);
+void		graph_mlx(t_master *game);
 
 /*graph_mlx2.c*/
 void		set_obs(t_master *game, int i, int row);
