@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:54:38 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/04 16:04:00 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/05 12:27:40 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	data_collect(t_master *game, t_nav *map)
 				game->data->collectible = collect(game->data->to_collect,
 						i, map->index, NULL);
 		}
-		//matrix(&map, i);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:28:33 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/04 15:35:06 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/05 14:49:20 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	verify(int ac, char **av, t_master *game)
 	if (ft_strcmp(str, ".ber") != 0)
 		null_error(FILE_TYPE);
 	verify_file(fd, game);
-	//verify_matrix(game);
+	verify_matrix(game);
 	close(fd);
 }
 

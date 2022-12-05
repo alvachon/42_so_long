@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:07:24 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/04 12:27:59 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/05 15:10:41 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,9 @@ typedef struct s_data
 	int				p_x;
 	int				p_y;
 	int				trig_exit;
+	int				zone_exit;
+	int				z_x;
+	int				z_y;
 	int				collected;
 	int				to_collect;
 	t_info			player;
