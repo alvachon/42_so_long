@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:07:24 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/05 16:08:18 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/05 18:24:49 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define INTRUDER "Error\n Character not allowed in the map"
 # define DUPLICATE "Error\n Found unautorised duplicate data"
 # define MORE_COLLECT "Error\n Need at least one object to collect"
+# define INVALID "Error\n Unplayable game"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE BUFSIZ
@@ -47,7 +48,6 @@ typedef struct s_nav
 	int				len;
 	int				index;
 	char			*line;
-	char			*verif;
 	struct s_nav	*prev;
 	struct s_nav	*next;
 }	t_nav;
@@ -75,9 +75,6 @@ typedef struct s_data
 	int				p_x;
 	int				p_y;
 	int				trig_exit;
-	int				zone_exit;
-	int				z_x;
-	int				z_y;
 	int				collected;
 	int				to_collect;
 	t_info			player;
@@ -134,8 +131,8 @@ void		data_exit(t_master *game, t_nav *map, int i);
 void		data_collect(t_master *game, t_nav *map);
 
 /*verify_matrix.c*/
-void		matrix(t_nav **map, int i);
-void		verify_matrix(t_master *game);
+char		**copy_map(t_master *game);
+int			verify_flood(t_master *game, int x, int y);
 
 /*graph_mlx.c*/
 void		corner(t_master *game);
