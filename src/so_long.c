@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:28:33 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/07 14:26:09 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/07 14:43:16 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	main(int ac, char **av)
 	game->win = mlx_new_window(game->mlx,
 			game->win_x, game->win_y, "so_long");
 	graph_mlx(game);
-	/*mlx_hook(game->win, ON_DESTROY, 0, x_close, game);*/
+	mlx_hook(game->win, 17, 0, x_close, game);
 	mlx_key_hook(game->win, key_hook, game);
 	mlx_loop(game->mlx);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:07:24 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/07 14:20:22 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/07 14:42:46 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,6 @@
 #  define BUFFER_SIZE 0
 # endif
 
-enum {
-	ON_KEYDOWN = 2,
-	ON_KEYUP = 3,
-	ON_MOUSEDOWN = 4,
-	ON_MOUSEUP = 5,
-	ON_MOUSEMOVE = 6,
-	ON_EXPOSE = 12,
-	ON_DESTROY = 17
-};
 typedef struct s_nav
 {
 	int				len;
