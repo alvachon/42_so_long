@@ -6,37 +6,66 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 18:21:12 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/04 12:55:23 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/07 14:25:07 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-int	x_close(t_master *game)
+void	del_target(t_master *game)
 {
-	if (game)
+	t_target	*collect;
+
+	while (game->data->collectible)
 	{
-		mlx_clear_window(game, game->win);
-		mlx_destroy_window(game, game->win);
+		collect = game->data->collectible->next;
+		free(game->data->collectible);
+		game->data->collectible = collect;
 	}
+	game->data->collectible = NULL;
+}
+
+void	del_nav(t_master *game)
+{
+	t_nav	*map;
+
+	while (game->map)
+	{
+		map = game->map->next;
+		free(game->map);
+		game->map = map;
+	}
+	game->map = NULL;
+}
+
+void	del_game(t_master *game)
+{
+	del_target(game);
+	del_nav(game);
+	free(game);
+	game = NULL;
+	return ;
+}
+
+int	x_close(int keycode, t_master *game)
+{
+	keycode = 0;
+	if (game && keycode)
+		del_game(game);
+	exit(0);
+}
+
+int	esc(t_master *game)
+{
+	mlx_destroy_window(game, game->win);
+	del_game(game);
 	exit (0);
 }
 
-/*int	red_exit(int key, t_master *game)
-{
-	key = 0;
-	if (game)
-	{
-		mlx_clear_window(game, game->win);
-		mlx_destroy_window(game, game->win);
-	}
-	exit (0);
-}*/
-
 int	key_hook(int key, t_master *game)
 {
-	/*if (key == 53)65307
-		red_exit(key, game);*/
+	if (key == 53 || 65307)
+		esc(game);
 	if (key == 13 || key == 119)
 		player_up(game);
 	if (key == 1 || key == 115)

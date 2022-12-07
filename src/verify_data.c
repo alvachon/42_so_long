@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:54:38 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/05 12:27:40 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/07 12:45:03 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	data_player(t_master *game, t_nav *map, int i)
 	game->data->player.quantity += 1;
 	game->data->player.index_row = map->index;
 	game->data->player.index_col = i;
+	game->data->p_y = map->index;
+	game->data->p_x = i;
 }
 
 void	data_exit(t_master *game, t_nav *map, int i)

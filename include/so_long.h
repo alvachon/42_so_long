@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:07:24 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/05 18:24:49 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/07 14:20:22 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,15 @@
 #  define BUFFER_SIZE 0
 # endif
 
+enum {
+	ON_KEYDOWN = 2,
+	ON_KEYUP = 3,
+	ON_MOUSEDOWN = 4,
+	ON_MOUSEUP = 5,
+	ON_MOUSEMOVE = 6,
+	ON_EXPOSE = 12,
+	ON_DESTROY = 17
+};
 typedef struct s_nav
 {
 	int				len;
@@ -167,9 +176,11 @@ void		player_left(t_master *game);
 void		player_right(t_master *game);
 
 /*hook.c*/
-int			x_close(t_master *game);
-int			red_exit(int key, t_master *game);
+int			x_close(int keycode, t_master *game);
 int			key_hook(int key, t_master *game);
+void		del_target(t_master *game);
+void		del_nav(t_master *game);
+int			esc(t_master *game);
 
 /*04_gnl.c*/
 char		*ft_strrchr(const char *s, int c);

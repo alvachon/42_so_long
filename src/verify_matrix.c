@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 13:29:25 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/05 18:29:26 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/07 12:46:03 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,17 @@ static char	*ft_strdup(const char *str)
 char	**copy_map(t_master *game)
 {
 	char	**copy;
+	t_nav	*map;
 	int		i;
 
 	i = 0;
+	map = game->map;
 	copy = ft_calloc(game->data->max_row + 1, sizeof(char *));
 	while (i < game->data->max_row)
 	{
-		copy[i] = ft_strdup((const char *)game->map);
+		copy[i] = ft_strdup((const char *)map->line);
+		printf("%s\n", copy[i]);
+		map = map->next;
 		i++;
 	}
 	return (copy);
@@ -51,7 +55,7 @@ int	verify_flood(t_master *game, int x, int y)
 	static char	**map;
 
 	if (items == -1)
-		items = game->data->to_collect + 2;
+		items = game->data->to_collect + 1;
 	if (!map)
 		map = copy_map(game);
 	if (x >= 0 && x <= game->map->len && y >= 0 && y <= game->data->max_row)
@@ -60,7 +64,7 @@ int	verify_flood(t_master *game, int x, int y)
 			return (items);
 		else
 		{
-			if (map[y][x] == 'C' || map[y][x] == 'E' || map[y][x] == 'P')
+			if (map[y][x] == 'C' || map[y][x] == 'E')
 				items--;
 			else if (map[y][x] == '1')
 				return (items);
