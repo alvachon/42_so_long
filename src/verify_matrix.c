@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 13:29:25 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/08 10:34:16 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/08 11:22:39 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char	**copy_map(t_master *game)
 		map = map->next;
 		i++;
 	}
+	game->path = copy;
 	return (copy);
 }
 
@@ -74,6 +75,5 @@ int	verify_flood(t_master *game, int x, int y)
 		verify_flood(game, x, y + 1);
 		verify_flood(game, x, y - 1);
 	}
-	
 	return (items);
 }

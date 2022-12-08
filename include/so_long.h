@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:07:24 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/08 10:21:03 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/08 11:21:37 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef struct s_master
 	int				win_y;
 	int				x;
 	int				y;
+	char			**path;
 	void			*n_wall;
 	void			*s_wall;
 	void			*e_wall;

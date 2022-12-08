@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 10:00:11 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/08 10:34:15 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/08 11:36:08 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,33 @@ void	del_nav(t_master *game)
 	game->map = NULL;
 }
 
-void	del_array(char **array)
+void	del_array(t_master *game)
 {
-	char	**map;
+	char	**line;
 
-	map = NULL;
-	while (*array)
-		free(*array);
-	array = NULL;
+	line = game->path;
+	while (line)
+	{
+		if (*line != NULL)
+			free(*line);
+	}
+	game->path = NULL;
+	return ;
 }
 
 void	del_game(t_master *game)
 {
-	del_target(game);
-	del_nav(game);
+	if (game->data->collectible)
+		del_target(game);
+	if (game->map)
+		del_nav(game);
+	if (game->path)
+		del_array(game);
+	if (game->data)
+	{
+		free(game->data);
+		game->data = NULL;
+	}
 	free(game);
 	game = NULL;
 	return ;
