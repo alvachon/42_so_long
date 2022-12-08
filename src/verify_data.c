@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:54:38 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/08 10:21:46 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/08 14:34:59 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,33 @@ void	verify_data(t_master *game)
 		null_error(MORE_COLLECT, game);
 }
 
-void	data_player(t_master *game, t_nav *map, int i)
+void	data(t_master *game, t_nav *map, int i)
 {
-	game->data->player.quantity += 1;
-	game->data->player.index_row = map->index;
-	game->data->player.index_col = i;
-	game->data->p_y = map->index;
-	game->data->p_x = i;
-}
-
-void	data_exit(t_master *game, t_nav *map, int i)
-{
+	if (map->line[i] == 'P')
+	{
+		game->data->player.quantity += 1;
+		game->data->player.index_row = map->index;
+		game->data->player.index_col = i;
+		game->data->p_y = map->index;
+		game->data->p_x = i;
+	}
+	else if (map->line[i] == 'E')
+	{
 		game->data->exit.quantity += 1;
 		game->data->exit.index_row = map->index;
 		game->data->exit.index_col = i;
+	}
+}
+
+int	ft_strchr(const char *s, char c)
+{
+	while (*s != c)
+	{
+		if (*s == '\0')
+			return (1);
+		s++;
+	}
+	return (0);
 }
 
 void	data_collect(t_master *game, t_nav *map)
@@ -55,12 +68,12 @@ void	data_collect(t_master *game, t_nav *map)
 	int	i;
 
 	i = 1;
-	while (map->line[i] != '\0')
+	while (map->line[i] != '\0' && i < game->map->len)
 	{
-		if (map->line[i] == 'P')
-			data_player(game, map, i);
-		if (map->line[i] == 'E')
-			data_exit(game, map, i);
+		if (ft_strchr("PE", map->line[i]) == 0)
+			data(game, map, i);
+		if (ft_strchr("PEC10", map->line[i]) == 1)
+			null_error(INTRUDER, game);
 		if (map->line[i] == 'C')
 		{
 			game->data->to_collect += 1;

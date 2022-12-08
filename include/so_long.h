@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:07:24 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/08 11:21:37 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/08 14:51:21 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define NOT_REC "Error\n Map is not rectangular\n"
 # define LIMIT_WALL "Error\n Map is not surrounded by wall\n"
 # define INTRUDER "Error\n Character not allowed in the map\n"
-# define DUPLICATE "Error\n Found unautorised duplicate data\n"
+# define DUPLICATE "Error\n Quantity of data is not autorised\n"
 # define MORE_COLLECT "Error\n Need at least one object to collect\n"
 # define INVALID "Error\n Unplayable game\n"
 
@@ -74,6 +74,7 @@ typedef struct s_data
 	int				max_row;
 	int				p_x;
 	int				p_y;
+	int				move_count;
 	int				trig_exit;
 	int				collected;
 	int				to_collect;
@@ -132,8 +133,8 @@ void		verify_y_wall(t_master *game, t_nav *map);
 /*verify_data.c*/
 t_target	*collect(int n, int x_index, int y_index, t_target *last);
 void		verify_data(t_master *game);
-void		data_player(t_master *game, t_nav *map, int i);
-void		data_exit(t_master *game, t_nav *map, int i);
+int			ft_strchr(const char *s, char c);
+void		data(t_master *game, t_nav *map, int i);
 void		data_collect(t_master *game, t_nav *map);
 
 /*verify_matrix.c*/

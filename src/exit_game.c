@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 10:00:11 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/08 11:36:08 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/08 13:46:25 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,15 @@ void	del_target(t_master *game)
 
 void	del_nav(t_master *game)
 {
-	t_nav	*map;
-
-	while (game->map)
+	game->map = game->map->next;
+	while (game->map->next)
 	{
-		map = game->map->next;
-		free(game->map);
-		game->map = map;
+		free(game->map->prev);
+		game->map = game->map->next;
 	}
+	game->map = game->map->next;
+	free(game->map->prev);
+	free(game->map);
 	game->map = NULL;
 }
 
