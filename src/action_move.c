@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 18:25:34 by alvachon          #+#    #+#             */
-/*   Updated: 2022/11/30 19:05:43 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/08 10:09:39 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	player_up(t_master *game)
 		if (game->map->line[game->data->p_x] != 'E')
 			set_floor(game, game->data->p_x, game->data->p_y);
 		else
-			set_exit(game, game->data->p_x, game->data->p_y);
+			set_exit(game, game->data->exit.index_row,
+				game->data->exit.index_col);
 		set_player(game, game->data->p_x, game->map->prev->index);
 		place_at_player_up(game);
 		collect_data(game);
@@ -33,7 +34,8 @@ void	player_down(t_master *game)
 		if (game->map->line[game->data->p_x] != 'E')
 			set_floor(game, game->data->p_x, game->data->p_y);
 		else
-			set_exit(game, game->data->p_x, game->data->p_y);
+			set_exit(game, game->data->exit.index_row,
+				game->data->exit.index_col);
 		set_player(game, game->data->p_x, game->map->next->index);
 		place_at_player_down(game);
 		collect_data(game);
@@ -47,7 +49,8 @@ void	player_left(t_master *game)
 		if (game->map->line[game->data->p_x] != 'E')
 			set_floor(game, game->data->p_x, game->data->p_y);
 		else
-			set_exit(game, game->data->p_x, game->data->p_y);
+			set_exit(game, game->data->exit.index_col,
+				game->data->exit.index_row);
 		set_player(game, game->data->p_x - 1, game->data->p_y);
 		collect_data(game);
 	}
@@ -60,7 +63,8 @@ void	player_right(t_master *game)
 		if (game->map->line[game->data->p_x] != 'E')
 			set_floor(game, game->data->p_x, game->data->p_y);
 		else
-			set_exit(game, game->data->p_x, game->data->p_y);
+			set_exit(game, game->data->exit.index_row,
+				game->data->exit.index_col);
 		set_player(game, game->data->p_x + 1, game->data->p_y);
 		collect_data(game);
 	}

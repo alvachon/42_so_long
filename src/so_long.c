@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:28:33 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/07 14:43:16 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/08 10:21:06 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	verify_map(t_master *game, t_nav *map)
 	while (i <= game->data->max_row)
 	{
 		if (map->len != len)
-			null_error(NOT_REC);
+			null_error(NOT_REC, game);
 		if (map->index == 1 || map->index == game->data->max_row)
 			verify_x_wall(game, map);
 		else if (map->index > 1 || map->index < game->data->max_row)
@@ -53,7 +53,7 @@ void	verify_map(t_master *game, t_nav *map)
 		map = map->next;
 		i++;
 	}
-	verify_dimension(len, game->data->max_row);
+	verify_dimension(len, game->data->max_row, game);
 	game->win_x = len * 32;
 	game->win_y = game->data->max_row * 32;
 	game->map = copy;
@@ -70,12 +70,12 @@ void	verify_file(int fd, t_master *game)
 	line = NULL;
 	line = get_next_line(fd);
 	if (!line)
-		null_error(NO_FILE);
+		null_error(NO_FILE, game);
 	map = keep_data(row_count, line, NULL);
 	get_all_data(line, fd, row_count, &map);
 	game->data->max_row = map->index;
 	if (game->data->max_row <= 2)
-		null_error(NO_PLAY);
+		null_error(NO_PLAY, game);
 	while (map->index != 1)
 		map = map->prev;
 	game->map = map;
@@ -89,17 +89,17 @@ void	verify(int ac, char **av, t_master *game)
 
 	fd = open(av[0], O_RDONLY);
 	if (fd < 0)
-		null_error(NO_FILE);
+		null_error(NO_FILE, game);
 	if (ac != 2)
-		null_error(ARG_COUNT);
+		null_error(ARG_COUNT, game);
 	str = ft_strrchr(av[0], '.');
 	while (ft_strlen(str) != 4)
 		str = ft_strrchr(str, '.');
 	if (ft_strcmp(str, ".ber") != 0)
-		null_error(FILE_TYPE);
+		null_error(FILE_TYPE, game);
 	verify_file(fd, game);
 	if (verify_flood(game, game->data->p_x, game->data->p_y) != 0)
-		null_error(INVALID);
+		null_error(INVALID, game);
 	close(fd);
 }
 

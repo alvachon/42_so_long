@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:54:17 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/05 18:25:35 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/08 10:21:00 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ void	get_all_data(char *line, int fd, int i, t_nav **map)
 	(*map)->len += 1;
 }
 
-void	verify_dimension(int x, int y)
+void	verify_dimension(int x, int y, t_master *game)
 {
 	if (x < 5 || y < 3)
-		null_error(NO_PLAY);
+		null_error(NO_PLAY, game);
 }
 
 void	verify_x_wall(t_master *game, t_nav *map)
@@ -52,7 +52,7 @@ void	verify_x_wall(t_master *game, t_nav *map)
 	while (i != map->len)
 	{
 		if (map->line[i] != '1')
-			null_error(LIMIT_WALL);
+			null_error(LIMIT_WALL, game);
 		i++;
 	}
 	if (map->index == game->data->max_row)
@@ -68,6 +68,6 @@ void	verify_y_wall(t_master *game, t_nav *map)
 
 	len = map->len;
 	if (map->line[0] != '1' || map->line[len - 1] != '1')
-		null_error(LIMIT_WALL);
+		null_error(LIMIT_WALL, game);
 	data_collect(game, map);
 }

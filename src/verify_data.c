@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:54:38 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/07 12:45:03 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/08 10:21:46 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ t_target	*collect(int n, int x_index, int y_index, t_target *last)
 void	verify_data(t_master *game)
 {
 	if (game->data->player.quantity != 1)
-		null_error(DUPLICATE);
+		null_error(DUPLICATE, game);
 	if (game->data->exit.quantity != 1)
-		null_error(DUPLICATE);
+		null_error(DUPLICATE, game);
 	if (game->data->to_collect < 1)
-		null_error(MORE_COLLECT);
+		null_error(MORE_COLLECT, game);
 }
 
 void	data_player(t_master *game, t_nav *map, int i)

@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:07:24 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/07 14:42:46 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/08 10:21:03 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@
 # include <stdint.h>
 
 # define MLX_ERROR 0
-# define NO_FILE "Error\n No file"
-# define FILE_TYPE "Error\n Bad file type"
-# define NO_TEXT "Error\n File is empty"
-# define NO_PLAY "Error\n Map is too small"
-# define ARG_COUNT "Error\n Argument count"
-# define NOT_REC "Error\n Map is not rectangular"
-# define LIMIT_WALL "Error\n Map is not surrounded by wall"
-# define INTRUDER "Error\n Character not allowed in the map"
-# define DUPLICATE "Error\n Found unautorised duplicate data"
-# define MORE_COLLECT "Error\n Need at least one object to collect"
-# define INVALID "Error\n Unplayable game"
+# define NO_FILE "Error\n No file\n"
+# define FILE_TYPE "Error\n Bad file type\n"
+# define NO_TEXT "Error\n File is empty\n"
+# define NO_PLAY "Error\n Map is too small\n"
+# define ARG_COUNT "Error\n Argument count\n"
+# define NOT_REC "Error\n Map is not rectangular\n"
+# define LIMIT_WALL "Error\n Map is not surrounded by wall\n"
+# define INTRUDER "Error\n Character not allowed in the map\n"
+# define DUPLICATE "Error\n Found unautorised duplicate data\n"
+# define MORE_COLLECT "Error\n Need at least one object to collect\n"
+# define INVALID "Error\n Unplayable game\n"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE BUFSIZ
@@ -109,6 +109,11 @@ void		reset_collect(t_master *game);
 int			collect_taken(t_master *game);
 void		collect_data(t_master *game);
 
+/*exit_game*/
+void		del_target(t_master *game);
+void		del_nav(t_master *game);
+void		del_game(t_master *game);
+
 /*so_long.c*/
 t_master	*set_memory(void);
 void		verify_map(t_master *game, t_nav *map);
@@ -119,7 +124,7 @@ int			main(int ac, char **av);
 /*verify_contour.c*/
 t_nav		*keep_data(int row_index, char *line, t_nav *last);
 void		get_all_data(char *line, int fd, int i, t_nav **map);
-void		verify_dimension(int x, int y);
+void		verify_dimension(int x, int y, t_master *game);
 void		verify_x_wall(t_master *game, t_nav *map);
 void		verify_y_wall(t_master *game, t_nav *map);
 
@@ -190,7 +195,7 @@ char		*ft_strjoin(char *s1, char *s2);
 /*07_return.c*/
 int			free_element(t_data *element);
 int			error(char *message);
-void		*null_error(char *message);
+void		*null_error(char *message, t_master *game);
 void		place_at_player_up(t_master *game);
 void		place_at_player_down(t_master *game);
 

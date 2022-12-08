@@ -28,6 +28,7 @@ SRCS        :=      src/action_collect.c \
                           src/verify_contour.c \
                           src/verify_data.c \
                           src/verify_matrix.c \
+						  src/exit_game.c
                           
 OBJS        := $(SRCS:.c=.o)
 
