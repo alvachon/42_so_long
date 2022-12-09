@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:28:33 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/08 14:40:22 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/09 11:31:02 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,32 @@
 
 t_master	*set_memory(void)
 {
-	static t_master	*game = NULL;
-	t_data			*data;
-	t_nav			*map;
-	t_target		*collectible;
+	t_master	*game;
+	t_data		*data;
+	t_nav		*map;
+	t_target	*collectible;
 
-	if (game == NULL)
-		game = ft_calloc(1, sizeof(t_master));
-	data = NULL;
+	game = ft_calloc(1, sizeof(t_master));
+	if (!game)
+		return (NULL);
 	data = ft_calloc(1, sizeof(t_data));
-	map = NULL;
+	if (!data)
+		return (NULL);
 	map = ft_calloc(1, sizeof(t_nav));
-	collectible = NULL;
+	if (!map)
+	{
+		free(game);
+		free(data);
+		return (NULL);
+	}
 	collectible = ft_calloc(1, sizeof(t_target));
+	if (!collectible)
+	{
+		free(game);
+		free(data);
+		free(map);
+		return (NULL);
+	}
 	game->data = data;
 	game->data->collectible = collectible;
 	game->map = map;

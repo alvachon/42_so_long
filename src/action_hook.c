@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 18:21:12 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/08 16:02:33 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/09 11:52:50 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,16 @@
 
 int	x_close(int keycode, t_master *game)
 {
-	keycode = 0;
-	del_game(game);
-	exit(0);
+	if (keycode && game)
+		del_game(game);
+	return (0);
 }
 
 int	esc(t_master *game)
 {
-	del_game(game);
-	exit(0);
+	if (game)
+		del_game(game);
+	return (0);
 }
 
 int	key_hook(int key, t_master *game)
