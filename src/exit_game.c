@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 10:00:11 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/09 11:51:39 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/11 15:52:53 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,15 @@ void	del_game(t_master *game)
 		free(game->data);
 		game->data = NULL;
 	}
+	mlx_destroy_image(game->mlx, game->u_exit);
+	mlx_destroy_image(game->mlx, game->n_wall);
+	mlx_destroy_image(game->mlx, game->s_wall);
+	mlx_destroy_image(game->mlx, game->o_wall);
+	mlx_destroy_image(game->mlx, game->w_wall);
+	mlx_destroy_image(game->mlx, game->e_wall);
+	mlx_destroy_image(game->mlx, game->floor);
+	mlx_destroy_image(game->mlx, game->player);
+	mlx_destroy_image(game->mlx, game->collect);
 	mlx_destroy_window(game->mlx, game->win);
 	free(game);
 	game = NULL;

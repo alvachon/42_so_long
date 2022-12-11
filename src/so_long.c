@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:28:33 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/09 11:31:02 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/11 15:58:37 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,10 @@ t_master	*set_memory(void)
 		return (NULL);
 	map = ft_calloc(1, sizeof(t_nav));
 	if (!map)
-	{
-		free(game);
-		free(data);
 		return (NULL);
-	}
 	collectible = ft_calloc(1, sizeof(t_target));
 	if (!collectible)
-	{
-		free(game);
-		free(data);
-		free(map);
 		return (NULL);
-	}
 	game->data = data;
 	game->data->collectible = collectible;
 	game->map = map;
