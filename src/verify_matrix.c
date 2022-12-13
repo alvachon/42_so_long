@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 13:29:25 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/08 11:22:39 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/13 17:43:27 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,33 +32,35 @@ static char	*ft_strdup(const char *str)
 
 char	**copy_map(t_master *game)
 {
-	char	**copy;
-	t_nav	*map;
 	int		i;
+	char	**str;
 
 	i = 0;
-	map = game->map;
-	copy = ft_calloc(game->data->max_row + 1, sizeof(char *));
-	while (i < game->data->max_row)
+	while (game->map->prev != NULL)
+		game->map = game->map->prev;
+	str = ft_calloc(game->data->max_row + 1, sizeof(char *));
+	while (i < game->data->max_row && game->map->next != NULL)
 	{
-		copy[i] = ft_strdup((const char *)map->line);
-		map = map->next;
+		str[i] = ft_strdup(game->map->line);
+		game->map = game->map->next;
 		i++;
 	}
-	game->path = copy;
-	return (copy);
+	while (game->map->prev != NULL)
+		game->map = game->map->prev;
+	game->path = str;
+	return (game->path);
 }
 
 int	verify_flood(t_master *game, int x, int y)
 {
 	static int	items = -1;
-	static char	**map;
+	static char	**map = NULL;
 
 	if (items == -1)
 		items = game->data->to_collect + 1;
 	if (!map)
 		map = copy_map(game);
-	if (x >= 0 && x <= game->map->len && y >= 0 && y <= game->data->max_row)
+	if (x >= 0 && x < game->map->len && y >= 0 && y < game->data->max_row - 1)
 	{
 		if (map[y][x] == 'F')
 			return (items);

@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:03:50 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/04 12:58:24 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/13 17:43:48 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	set_active(t_master *game)
 {
 	int	i;
 
+	while (game->map->prev != NULL)
+		game->map = game->map->prev;
 	game->map = game->map->next;
 	while (game->map->index != game->data->max_row)
 	{

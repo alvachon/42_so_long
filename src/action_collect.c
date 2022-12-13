@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 18:37:32 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/08 10:10:55 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/13 17:43:29 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int	collect_taken(t_master *game)
 void	unlock_exit(t_master *game)
 {
 	game->data->trig_exit = 1;
-	free_element(game->u_exit);
 	set_unlock(game, game->data->exit.index_col,
 		game->data->exit.index_row);
 }
@@ -68,6 +67,9 @@ void	collect_data(t_master *game)
 	if (game->map->line[game->data->p_x] == 'E')
 	{
 		if (game->data->trig_exit == 1)
+		{
 			del_game(game);
+			exit(0);
+		}
 	}
 }

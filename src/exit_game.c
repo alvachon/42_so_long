@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 10:00:11 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/11 15:52:53 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/13 17:43:40 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	del_target(t_master *game)
 {
 	t_target	*next;
 
-	if (game->data == NULL || game->data->collectible == NULL)
-		return ;
 	while (game->data->collectible->prev != NULL)
 		game->data->collectible = game->data->collectible->prev;
 	while (game->data->collectible != NULL)
@@ -26,66 +24,45 @@ void	del_target(t_master *game)
 		free(game->data->collectible);
 		game->data->collectible = next;
 	}
+	free(game->data->collectible);
 	game->data->collectible = NULL;
 }
 
-void	del_nav(t_master *game)
+void	del_nav(t_master **game)
 {
 	t_nav	*next;
 
-	if (game->map == NULL)
-		return ;
-	while (game->map->prev != NULL)
-		game->map = game->map->prev;
-	while (game->map != NULL)
+	while ((*game)->map->prev != NULL)
+		(*game)->map = (*game)->map->prev;
+	while ((*game)->map != NULL)
 	{
-		next = game->map->next;
-		free(game->map);
-		game->map = next;
+		next = (*game)->map->next;
+		free((*game)->map);
+		(*game)->map = next;
 	}
-	game->map = NULL;
 }
 
-void	del_array(t_master *game)
+void	del_array(t_master **game)
 {
-	char	**line;
+	int		i;
 
-	if (game->path == NULL)
+	i = 0;
+	if ((*game)->path == NULL)
 		return ;
-	line = game->path;
-	while (line != NULL && *line != NULL)
+	while ((*game)->path[i] != NULL)
 	{
-		free(*line);
-		line++;
+		free((*game)->path[i]);
+		i++;
 	}
-	game->path = NULL;
+	free((*game)->path);
+	(*game)->path = NULL;
 	return ;
 }
 
 void	del_game(t_master *game)
 {
-	if (game->data && game->data->collectible)
+	if (game->data->collectible != NULL)
 		del_target(game);
-	if (game->map)
-		del_nav(game);
-	if (game->path)
-		del_array(game);
-	if (game->data != NULL)
-	{
-		free(game->data);
-		game->data = NULL;
-	}
-	mlx_destroy_image(game->mlx, game->u_exit);
-	mlx_destroy_image(game->mlx, game->n_wall);
-	mlx_destroy_image(game->mlx, game->s_wall);
-	mlx_destroy_image(game->mlx, game->o_wall);
-	mlx_destroy_image(game->mlx, game->w_wall);
-	mlx_destroy_image(game->mlx, game->e_wall);
-	mlx_destroy_image(game->mlx, game->floor);
-	mlx_destroy_image(game->mlx, game->player);
-	mlx_destroy_image(game->mlx, game->collect);
-	mlx_destroy_window(game->mlx, game->win);
-	free(game);
-	game = NULL;
-	exit(0);
+	if (game->path != NULL)
+		del_array(&game);
 }

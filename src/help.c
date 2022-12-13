@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:36:31 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/08 16:00:30 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/13 17:44:26 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ int	error(char *message)
 void	*null_error(char *message, t_master *game)
 {
 	error(message);
-	if (game)
-		del_game(game);
+	del_game(game);
 	exit(1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 18:04:46 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/04 12:45:15 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/13 17:43:52 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,6 @@ void	set_exit(t_master *game, int i, int row)
 		free_element(game->u_exit);
 		exit(1);
 	}
-	mlx_put_image_to_window(game->mlx, game->win,
-		game->u_exit, i * 32, (row * 32) - 32);
-}
-
-void	set_unlock(t_master *game, int i, int row)
-{
 	game->a_exit = mlx_xpm_file_to_image(game->mlx,
 			"include/xpm/exit_act.xpm", &game->x, &game->y);
 	if (game->a_exit == NULL)
@@ -55,6 +49,12 @@ void	set_unlock(t_master *game, int i, int row)
 		free_element(game->a_exit);
 		exit(1);
 	}
+	mlx_put_image_to_window(game->mlx, game->win,
+		game->u_exit, i * 32, (row * 32) - 32);
+}
+
+void	set_unlock(t_master *game, int i, int row)
+{
 	mlx_put_image_to_window(game->mlx, game->win,
 		game->a_exit, i * 32, (row * 32) - 32);
 }

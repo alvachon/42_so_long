@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:07:24 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/08 14:51:21 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/13 16:21:27 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,13 +112,14 @@ int			collect_taken(t_master *game);
 void		collect_data(t_master *game);
 
 /*exit_game*/
+void	del_array(t_master **game);
 void		del_target(t_master *game);
-void		del_nav(t_master *game);
+void		del_nav(t_master **game);
 void		del_game(t_master *game);
 
 /*so_long.c*/
 t_master	*set_memory(void);
-void		verify_map(t_master *game, t_nav *map);
+void		verify_map(t_master *game);
 void		verify_file(int fd, t_master *game);
 void		verify(int ac, char **av, t_master *game);
 int			main(int ac, char **av);
@@ -127,15 +128,15 @@ int			main(int ac, char **av);
 t_nav		*keep_data(int row_index, char *line, t_nav *last);
 void		get_all_data(char *line, int fd, int i, t_nav **map);
 void		verify_dimension(int x, int y, t_master *game);
-void		verify_x_wall(t_master *game, t_nav *map);
-void		verify_y_wall(t_master *game, t_nav *map);
+void		verify_x_wall(t_master *game);
+void		verify_y_wall(t_master *game);
 
 /*verify_data.c*/
 t_target	*collect(int n, int x_index, int y_index, t_target *last);
 void		verify_data(t_master *game);
 int			ft_strchr(const char *s, char c);
-void		data(t_master *game, t_nav *map, int i);
-void		data_collect(t_master *game, t_nav *map);
+void		data(t_master *game, int i);
+void		data_collect(t_master *game);
 
 /*verify_matrix.c*/
 char		**copy_map(t_master *game);
@@ -177,7 +178,6 @@ void		player_right(t_master *game);
 int			x_close(int keycode, t_master *game);
 int			key_hook(int key, t_master *game);
 void		del_target(t_master *game);
-void		del_nav(t_master *game);
 int			esc(t_master *game);
 
 /*04_gnl.c*/
