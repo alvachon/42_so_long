@@ -6,7 +6,7 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:28:33 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/13 17:12:17 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/14 10:49:26 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,20 @@ void	verify_file(int fd, t_master *game)
 	line = NULL;
 	line = get_next_line(fd);
 	if (!line)
+	{
+		close(fd);
 		null_error(NO_FILE, game);
+	}
 	game->map = NULL;
 	game->map = keep_data(row_count, line, game->map);
 	get_all_data(line, fd, row_count, &game->map);
 	game->data->max_row = game->map->index;
 	if (game->data->max_row <= 2)
+	{
+		close(fd);
 		null_error(NO_PLAY, game);
+	}
+	close(fd);
 	while (game->map->prev != NULL)
 		game->map = game->map->prev;
 	verify_map(game);
@@ -81,11 +88,13 @@ void	verify(int ac, char **av, t_master *game)
 		null_error(FILE_TYPE, game);
 	fd = open(av[0], O_RDONLY);
 	if (fd < 0)
+	{
+		close(fd);
 		null_error(NO_FILE, game);
+	}
 	verify_file(fd, game);
 	if (verify_flood(game, game->data->p_x, game->data->p_y - 1) != 0)
 		null_error(INVALID, game);
-	close(fd);
 }
 
 int	main(int ac, char **av)

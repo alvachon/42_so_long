@@ -6,13 +6,13 @@
 /*   By: alvachon <alvachon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 13:29:25 by alvachon          #+#    #+#             */
-/*   Updated: 2022/12/13 17:43:27 by alvachon         ###   ########.fr       */
+/*   Updated: 2022/12/14 10:49:30 by alvachon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-static char	*ft_strdup(const char *str)
+char	*ft_strdup(const char *str)
 {
 	size_t	i;
 	size_t	len;

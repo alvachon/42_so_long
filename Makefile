@@ -18,6 +18,7 @@ SRCS        :=      src/action_collect.c \
                           src/action_hook.c \
                           src/action_move.c \
                           src/autorisation.c \
+						  src/exit_game.c \
                           src/gnl.c \
                           src/graph_mlx.c \
                           src/graph_mlx1.c \
@@ -27,8 +28,7 @@ SRCS        :=      src/action_collect.c \
                           src/utils.c \
                           src/verify_contour.c \
                           src/verify_data.c \
-                          src/verify_matrix.c \
-						  src/exit_game.c
+                          src/verify_matrix.c
                           
 OBJS        := $(SRCS:.c=.o)
 
